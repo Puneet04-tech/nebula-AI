@@ -1,0 +1,8 @@
+{
+  "name": "Nebula AI",
+  "description": "Teach with a Wave. Learn with a Vibe. A futuristic, hands-free classroom assistant powered by Gemini 3 Pro.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}

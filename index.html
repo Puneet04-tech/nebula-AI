@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nebula AI | Teach with a Wave</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+      body {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        background-color: #050005; /* Deep Black/Purple Base */
+        overflow-x: hidden;
+        color: #fff1f2; /* Rose 50 */
+      }
+      
+      /* Accessibility Overrides */
+      .font-dyslexic {
+        font-family: 'Lexend', sans-serif !important;
+        letter-spacing: 0.05em;
+        line-height: 1.8 !important;
+        word-spacing: 0.1em;
+      }
+
+      .text-large { font-size: 110%; }
+      .text-xlarge { font-size: 125%; }
+
+      .high-contrast {
+        background-color: #000000 !important;
+        color: #ff0000 !important;
+      }
+      .high-contrast * {
+        background-color: #000000 !important;
+        color: #ff0000 !important;
+        border-color: #ff0000 !important;
+        text-shadow: none !important;
+        box-shadow: none !important;
+        background-image: none !important;
+      }
+      .high-contrast .glass, .high-contrast .glass-light, .high-contrast .aurora-bg, .high-contrast .noise-overlay {
+        background: black !important;
+        backdrop-filter: none !important;
+      }
+      .high-contrast button {
+        border: 2px solid #ff0000 !important;
+        text-decoration: underline;
+      }
+
+      /* Neon Red & Purple Background */
+      .aurora-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: -1;
+        background-color: #050005;
+        
+        background-image: 
+          /* 1. Top-Left: Intense Neon Red Glow */
+          radial-gradient(circle at 20% 20%, rgba(255, 0, 60, 0.4) 0%, transparent 60%),
+          
+          /* 2. Bottom-Right: Intense Neon Purple Glow */
+          radial-gradient(circle at 80% 80%, rgba(188, 19, 254, 0.4) 0%, transparent 60%),
+          
+          /* 3. Center: Deep Neon Violet Bridge */
+          radial-gradient(circle at 50% 50%, rgba(120, 0, 255, 0.2) 0%, transparent 50%),
+          
+          /* 4. Base Gradient: Dark Red -> Dark Purple */
+          linear-gradient(135deg, #1f000a 0%, #0f0015 50%, #12001f 100%);
+          
+        background-size: 160% 160%;
+        animation: neonPulse 12s ease-in-out infinite alternate;
+      }
+
+      @keyframes neonPulse {
+        0% { background-position: 0% 0%; filter: brightness(1); }
+        100% { background-position: 20% 20%; filter: brightness(1.15); }
+      }
+
+      /* Noise Texture */
+      .noise-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        opacity: 0.05;
+        pointer-events: none;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+      }
+
+      /* Premium Dark Glass - Updated to complement Red/Purple */
+      .glass {
+        background: rgba(20, 5, 25, 0.6); /* Deep Violet/Black Base */
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 
+          0 4px 6px -1px rgba(0, 0, 0, 0.2), 
+          0 2px 4px -1px rgba(0, 0, 0, 0.1),
+          inset 0 0 20px rgba(255, 0, 60, 0.03); /* Slight red tint */
+      }
+      
+      .glass-light {
+         background: rgba(255, 255, 255, 0.08);
+         backdrop-filter: blur(12px);
+         border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      /* Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #050005;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #ff003c; /* Neon Red */
+        border-radius: 10px;
+        border: 2px solid #050005;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #bc13fe; /* Neon Purple */
+      }
+
+      /* Utility Animations */
+      .animate-fade-in {
+        animation: fadeIn 0.6s ease-out forwards;
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      
+      @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-8px); }
+        100% { transform: translateY(0px); }
+      }
+      .animate-float {
+        animation: float 6s ease-in-out infinite;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.2.1/",
+    "react": "https://aistudiocdn.com/react@^19.2.1",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.32.0",
+    "@mediapipe/tasks-vision": "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/+esm",
+    "peerjs": "https://cdn.jsdelivr.net/npm/peerjs@1.5.2/+esm"
+  }
+}
+</script>
+</head>
+  <body class="antialiased selection:bg-red-500/30 selection:text-red-200">
+    <div class="aurora-bg"></div>
+    <div class="noise-overlay"></div>
+    <div id="root"></div>
+    <svg style="display: none;">
+      <defs>
+        <filter id="protanopia">
+          <feColorMatrix type="matrix" values="0.567 0.433 0 0 0  0.558 0.442 0 0 0  0 0.242 0.758 0 0  0 0 0 1 0" />
+        </filter>
+        <filter id="deuteranopia">
+          <feColorMatrix type="matrix" values="0.625 0.375 0 0 0  0.7 0.3 0 0 0  0 0.3 0.7 0 0  0 0 0 1 0" />
+        </filter>
+        <filter id="tritanopia">
+          <feColorMatrix type="matrix" values="0.95 0.05 0 0 0  0 0.433 0.567 0 0  0 0.475 0.525 0 0  0 0 0 1 0" />
+        </filter>
+      </defs>
+    </svg>
+  </body>
+</html>
